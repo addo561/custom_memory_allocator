@@ -32,5 +32,10 @@ public:
     }
 };
 int main() {
+    ArenaAllocator alloc(1024);
+    auto ptr = alloc.allocator(4);
+    int* my_ptr = static_cast<int*>(ptr);
+    *my_ptr = 3;
+    std::cout<<my_ptr;
     return 0;
 }
