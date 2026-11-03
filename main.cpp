@@ -11,7 +11,9 @@ public:
         offset = 0;
         start_ptr = new char[total_size]; // allocate a block(Array) of bytes
     }
-
+    ~ArenaAllocator() {
+        delete[] start_ptr;
+    }
     void* allocator(size_t bytes) {
         //take number of bytes user wants and return pointer  to start  of that block
         //returns a void*(generic pointer) that can be cast to any type
@@ -26,7 +28,6 @@ public:
 
         }
         return nullptr;
-
 
     }
 };
