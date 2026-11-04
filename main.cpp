@@ -12,6 +12,7 @@ public:
         start_ptr = new char[total_size]; // allocate a block(Array) of bytes
     }
     ~ArenaAllocator() {
+        std::cout << "memory released\n";
         delete[] start_ptr;
     }
     void* allocator(size_t bytes) {
@@ -27,12 +28,14 @@ public:
             return pos;
 
         }
+        std::cout << "memory allocated\n";
         return nullptr;
 
     }
 };
-int main() {
-    ArenaAllocator alloc(1024);
+int main(int argc,char* argv[]) {
+    int arg1  = std::stoi(argv[1]);
+    ArenaAllocator alloc(arg1);
     auto ptr = alloc.allocator(4);
     int* my_ptr = static_cast<int*>(ptr);
     *my_ptr = 3;

@@ -41,6 +41,7 @@ public:
         }
         // block to handout
         FreeNode* block_return = head;
+        std::cout << "allocated\n";
         //update head
         head= head->next;
         return reinterpret_cast<void*>(block_return);
@@ -55,8 +56,10 @@ public:
 
 };
 
-int main() {
-    PoolAllocator alloc(32,1024);
+int main(int argc,char* argv[]) {
+    int arg1  = std::stoi(argv[1]);
+    int arg2 = std::stoi(argv[2]);
+    PoolAllocator alloc(arg1,arg2);
     void* ptr = alloc.allocate();
     int* my_ptr = static_cast<int*>(ptr);
     if (my_ptr==nullptr) {
