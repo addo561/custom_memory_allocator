@@ -34,9 +34,10 @@ public:
     }
 };
 int main(int argc,char* argv[]) {
-    int arg1  = std::stoi(argv[1]);
+    int arg1  = std::stoi(argv[1]); // sizet to handout
+    int arg2  = std::stoi(argv[2]);// bytes
     ArenaAllocator alloc(arg1);
-    auto ptr = alloc.allocator(4);
+    auto ptr = alloc.allocator(arg2);
     int* my_ptr = static_cast<int*>(ptr);
     *my_ptr = 3;
     std::cout<<my_ptr;
