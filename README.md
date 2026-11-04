@@ -9,3 +9,4 @@ Pointer is moved forward when you ask for memory also(catch) you can't free indi
 
 ## Pool allocator
 Request a block of memory and divide  it  into chunks.
+memory can be freed by users individually.
