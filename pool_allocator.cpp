@@ -34,6 +34,7 @@ public:
         last_node->next = nullptr;
         //set to  very  first  block of newly created list
         head = reinterpret_cast<FreeNode*>(start_ptr);
+        std::cout << "allocated\n";
     }
     void* allocate() {
         if (head == nullptr) {
@@ -41,7 +42,7 @@ public:
         }
         // block to handout
         FreeNode* block_return = head;
-        std::cout << "allocated\n";
+
         //update head
         head= head->next;
         return reinterpret_cast<void*>(block_return);
@@ -50,15 +51,15 @@ public:
         FreeNode* to_free = reinterpret_cast<FreeNode*>(ptr);
         to_free->next = head;
         head = to_free;
-        std::cout<< "done\n";
+        std::cout<< "freed\n";
 
     }
 
 };
 
 int main(int argc,char* argv[]) {
-    int arg1  = std::stoi(argv[1]);
-    int arg2 = std::stoi(argv[2]);
+    int arg1  = std::stoi(argv[1]); //block size
+    int arg2 = std::stoi(argv[2]);// total_size
     PoolAllocator alloc(arg1,arg2);
     void* ptr = alloc.allocate();
     int* my_ptr = static_cast<int*>(ptr);
@@ -66,7 +67,7 @@ int main(int argc,char* argv[]) {
         std::cout <<"null"<<std::endl;
         return 1;
     }
-    *my_ptr = 3;
+    *my_ptr = 3; //exmaple
     std::cout<<*my_ptr<<std::endl;
     alloc.dellocate(my_ptr);
     return 0;
